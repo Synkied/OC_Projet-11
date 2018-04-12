@@ -1,32 +1,35 @@
 {% load static %}
 
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-  <div class="container nav-container">
-    <a class="navbar-brand js-scroll-trigger" href="{% url 'index' %}"><object type="image/svg+xml" class="mr-2 align-top" height="30" width="50" data="{% static 'img/logo_pur_beurre.svg' %}" alt=""></object>Pur beurre</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ml-auto">
-        {% include 'shared/search_form_header.html' %}
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="{% url 'products:search' %}"><i class="fa fa-2x fa-search text-primary mb-3 sr-icons"></i></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="{% if user.is_authenticated %} {% url 'users:account' %} {% else %}{% url 'users:login' %}{% endif %}"><i class="{% if user.is_authenticated %}fa fa-2x fa-user {% else %} fa fa-2x fa-user-plus {% endif %} text-primary mb-3 sr-icons"></i></a>
-        </li>
-        <!-- if user is auth then show favorites page, else go to registration -->
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="{% if user.is_authenticated %} {% url 'products:favorites' %} {% else %}{% url 'users:login' %}{% endif %}"><img height="35" src="{% static 'img/carrot.svg' %}" alt="Mes aliments"></a>
-        </li>
-        <!-- if user is auth then disconnect user, else do nothing -->
-        {% if user.is_authenticated %}
+<div class="fixed-top">
+  {% include 'shared/message_display.html' %}
+  <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+    <div class="container nav-container">
+      <a class="navbar-brand js-scroll-trigger" href="{% url 'index' %}"><object type="image/svg+xml" class="mr-2 align-top" height="30" width="50" data="{% static 'img/logo_pur_beurre.svg' %}" alt=""></object>Pur beurre</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          {% include 'shared/search_form_header.html' %}
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="{% url 'users:logout' %}"><i class="fa fa-2x fa-sign-out text-primary mb-3 sr-icons"></i></a>
+            <a class="nav-link js-scroll-trigger" href="{% url 'products:search' %}"><i class="fa fa-2x fa-search text-primary mb-3 sr-icons"></i></a>
           </li>
-        {% endif %}
-      </ul>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="{% if user.is_authenticated %} {% url 'users:account' %} {% else %}{% url 'users:login' %}{% endif %}"><i class="{% if user.is_authenticated %}fa fa-2x fa-user {% else %} fa fa-2x fa-user-plus {% endif %} text-primary mb-3 sr-icons"></i></a>
+          </li>
+          <!-- if user is auth then show favorites page, else go to registration -->
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="{% if user.is_authenticated %} {% url 'products:favorites' %} {% else %}{% url 'users:login' %}{% endif %}"><img height="35" src="{% static 'img/carrot.svg' %}" alt="Mes aliments"></a>
+          </li>
+          <!-- if user is auth then disconnect user, else do nothing -->
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="{% url 'users:logout' %}"><i class="fa fa-2x fa-sign-out text-primary mb-3 sr-icons"></i></a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
+</div>

@@ -25,6 +25,7 @@
 
       <!-- Custom styles for this template -->
       <link href="{% static 'css/creative.css' %}" rel="stylesheet">
+      <link href="{% static 'css/jquery.messagebar.min.css' %}" rel="stylesheet">
     </head>
 
     <body id="page-top">
@@ -36,7 +37,8 @@
       {% include 'shared/footer.html' %}
 
       <!-- Bootstrap core JavaScript -->
-      <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+      <script src="{% static 'js/jquery.messagebar.js' %}"></script>
       <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
       <!-- Plugin JavaScript -->
@@ -46,6 +48,13 @@
 
       <!-- Custom scripts for this template -->
       <script src="{% static 'js/creative.min.js' %}"></script>
+
+      <script>
+        $(".messagebar").messageBar({
+          autoclose: true,
+          slide: true,
+        });
+      </script>
 
   </body>
 </html>

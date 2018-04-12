@@ -1,0 +1,8 @@
+{% for message in messages %}
+  <div class="messagebar messagebar-{% if message.tags %}{{ message.tags }}{% endif %}" id="message_{{ forloop.counter }}">
+    <div class="container">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="message">&times;</button>
+    </div>
+  </div>
+{% endfor %}

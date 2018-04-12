@@ -93,7 +93,8 @@ class UserChangePassword(LoginRequiredMixin, View):
 
         else:
             messages.error(
-                request, 'Veuillez corriger les erreurs ci-dessous.'
+                request, 'Un souci est survenu lors du changement \
+                de mot de passe, assurez vous de bien entrer deux fois le même mot de passe.'
             )
 
             # if incorrect inputs, reload the page
