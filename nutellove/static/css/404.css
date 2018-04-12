@@ -1,0 +1,13 @@
+h1 {
+  font-size: 6rem;
+  text-align:center;
+}
+
+.return {
+  text-align: center;
+  width: 100%;
+  color: #000;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  margin: 0;
+}

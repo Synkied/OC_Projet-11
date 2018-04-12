@@ -1,0 +1,39 @@
+<!-- Page used to display a better product than the one chosen at /search/?query url -->
+
+{% load static %}
+{% load i18n %}
+
+
+
+
+  {% if products|length_is:"0" %}
+  <section class="section-pad-px">
+    <div class="text-center mb-5 page-title">
+      {% comment %}Translators: No product found{% endcomment %}
+      {% blocktrans %} Mince, aucun produit ne correspond à cette recherche. Cherchez à nouveau ! {% endblocktrans %}
+    </div>
+    {% include 'shared/search_form.html' %}
+</section>
+
+
+  {% elif not query %}
+  <section class="section-pad">
+    <section>
+      {% include 'shared/search_form.html' %}
+      {% include 'products/shared/list_of_products.html'%}
+    </section>
+    </section>
+
+  {% else %}
+  <section class="section-pad">
+
+    <!-- display the chosen product -->
+    {% include 'products/shared/chosen_product.html' %}
+
+    <!-- display better products than the one chosen -->
+    {% include 'products/shared/list_of_products.html'%}
+  </section>
+  {% endif %}
+
+
+

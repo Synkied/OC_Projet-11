@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+
+{% block body %}
+
+<section class="section-pad">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 p-0">
+
+        <div class="card hovercard">
+            <div class="card-background-favorites">
+                <img class="card-bkimg" alt="" src=" {% static 'img/account_bg.jpg' %}">
+                <!-- http://lorempixel.com/850/280/people/9/ -->
+            </div>
+            <div class="favorite-msg-box">
+                <h1 class="text-uppercase favorite-msg"><span class="favorite-msg-txt">{% blocktrans %}Vos favoris{% endblocktrans %}</span></h1>
+              </div>
+        </div>
+    </div>
+  </div>
+    
+        
+<!--           <ul class="nav nav-tabs">
+  {% for favorite in favorites %}
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#{{ favorite.substitute.cat.name }}"> {{ favorite.substitute.cat.name }} </a>
+    </li>
+  {% endfor %}
+</ul>
+         -->
+
+        <div class="well mt-1">
+          <div class="tab-content">
+            
+            <div role="tabpanel" class="tab-pane active" id="{{ favorite.substitute.cat.name }}">
+              <ul class="list-group media-list media-list-stream">
+
+                <div class="row">
+                
+                {% for favorite in favorites %}
+                  <div class="col-xl-4 col-lg-6 col-md-6 col-xs-1 p-0 text-center border">
+
+                    {% if favorite.substitute.nutri_grade == "a" %}
+                      <div class="nutri-grade"><span class="badge nutri-a text-white">{{ favorite.substitute.nutri_grade.upper }}</span></div>
+                    {% elif favorite.substitute.nutri_grade == "b" %}
+                      <div class="nutri-grade"><span class="badge nutri-b text-white">{{ favorite.substitute.nutri_grade.upper }}</span></div>
+                    {% elif favorite.substitute.nutri_grade == "c" %}
+                      <div class="nutri-grade"><span class="badge nutri-c text-dark">{{ favorite.substitute.nutri_grade.upper }}</span></div>
+                    {% elif favorite.substitute.nutri_grade == "d" %}
+                      <div class="nutri-grade"><span class="badge nutri-d text-white">{{ favorite.substitute.nutri_grade.upper }}</span></div>
+                    {% elif favorite.substitute.nutri_grade == "e" %}
+                      <div class="nutri-grade"><span class="badge nutri-e text-white">{{ favorite.substitute.nutri_grade.upper }}</span></div>
+                    {% endif %}
+                    <div class="container vbottom p-3">
+                      <a href="{% url 'products:product_detail' product_id=favorite.substitute.id %}">
+                        {% if favorite.substitute.img_small is none %}
+                          <img class="img-responsive" src="{% static 'img/logo_pur_beurre.png' %}" alt="{{ favorite.substitute.name }}">
+                        {% else %}
+                          <img class="img-responsive" src="{{ favorite.substitute.img_small }}" alt="{{ favorite.substitute.name }}">
+                        {% endif %}
+                      </a>
+
+                      <!-- display the name of the product -->
+                      <h3><a href="{% url 'products:product_detail' product_id=favorite.substitute.id %}">{{ favorite.substitute.name }}</a></h3>
+
+                      <!-- display brands for each product, with a comma or not depending on brand index -->
+                      <ul class="list-inline">
+                        {% for brand in favorite.substitute.brands.all %}
+                          <!-- Display brands -->
+                          {% include 'products/shared/list_brand.html' with product=favorite.substitute %}
+                        {% endfor %}
+                      </ul>
+                      <!-- !!end display brands for each product -->
+
+                      <div class="favs mt-2">
+                        <!-- pass product_id to the url, to use it in the view and push it to db -->
+                        <form action="{% url 'products:bookmark' product_id=favorite.substitute.id %}" method="post">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-secondary" value="{{ favorite.substitute.id }}">
+                            {% blocktrans %}Retirer des favoris{% endblocktrans %}
+                            <i class="fa fa-minus-square"></i>
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+
+                  </div>
+
+                {% endfor %}
+                </div>
+
+
+              </ul>
+            </div>
+
+            <div role="tabpanel" class="tab-pane fade in" id="alternative">
+              <ul class="list-group media-list media-list-stream">
+                <p>Test</p>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

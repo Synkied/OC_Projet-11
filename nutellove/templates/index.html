@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block body %}
+    
+    <header class="masthead text-center text-white d-flex">
+      <div class="container my-auto">
+        <div class="row">
+          <div class="col-lg-10 mx-auto">
+            <h1 class="text-uppercase">
+              <span class="primary-title">
+              {% comment %}Translators: Moto of the website{% endcomment %}
+              {% blocktrans %} Du gras, oui, mais de qualité ! {% endblocktrans %}
+            </span>
+            </h1> 
+            <hr>
+          </div>
+          <div class="col-lg-8 mx-auto">
+            <h2 class="text-faded mb-5">
+              {% comment %}Translators: No product found{% endcomment %}
+              <span class="secondary-title"> {% blocktrans %} Trouvez un produit de substitution pour ceux que vous consommez tous les jours ! {% endblocktrans %} </span>
+            </h2>
+          </div>
+        </div>
+        {% include 'shared/search_form.html' %}
+      </div>
+    </header>
+
+    <section id="services">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading">{% blocktrans %} Colette et Rémy {% endblocktrans %}</h2>
+            <hr class="my-4">
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <h4 class="col-lg-12 col-md-6 text-center">{% blocktrans %} Le mot des fondateurs {% endblocktrans %}</h4>
+        <div class="row">
+          <div class="col-lg-6 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <img src="{% static 'img/colette-4_small.jpg' %}" height="150" alt="Photo de Colette">
+              <h3 class="mb-3">Colette</h3>
+              <p class="text-muted mb-0 text-justify">{% blocktrans %} "Nous aimons tous manger, surtout en France ! 
+                Personnellement, une baguette fraîche, du bon fromage de chèvre et un bon vin rouge me suffisent amplement. 
+                Comme tout le monde, je fais mes courses au supermarché. 
+                Mais petit à petit je me suis rendue compte, surtout lorsque nous avons ouvert le restaurant, 
+                que je pouvais remplacer les produits aseptisés que j'avais l'habitude d'acheter par de bons produits du terroir. Et souvent pour le même prix !" {% endblocktrans %}</p>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <img src="{% static 'img/remy-8_small.jpg' %}" height="150" alt="Photo de Rémy">
+              <h3 class="mb-3">Rémy</h3>
+              <p class="text-muted mb-0 text-justify">{% blocktrans %} "Pour ma part je me rendais déjà dans bien des magasins car j'aime beaucoup me balader, surtout dans les caves et les cuisines. 
+                Je connaissais par coeur le contenu des boutiques bio (dont je raffole) ainsi que les ingrédients de tous les aliments vendus. 
+                Lorsque Colette m'a demandé si elle pouvait remplacer son Nutella matinal par un aliment plus sain, je savais tout de suite où le trouver. L'idée de Pur Beurre était née !" {% endblocktrans %}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-dark text-white" id="contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto text-center">
+            <h2 class="section-heading">{% blocktrans %} Contactez-nous ! {% endblocktrans %}</h2>
+            <hr class="my-4">
+            <p class="mb-5">{% blocktrans %} On ne mange pas, alors n'hésitez pas à nous contacter ! {% endblocktrans %}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 ml-auto text-center">
+            <i class="fa fa-phone fa-3x mb-3 sr-contact"></i>
+            <p><a href="tel:+33123456789">123-456-6789</a></p>
+          </div>
+          <div class="col-lg-4 mr-auto text-center">
+            <i class="fa fa-envelope-o fa-3x mb-3 sr-contact"></i>
+            <p>
+              <a href="mailto:your-email@your-domain.com">miam@purbeurre.com</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock %}

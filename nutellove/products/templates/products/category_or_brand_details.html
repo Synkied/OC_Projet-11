@@ -1,0 +1,21 @@
+
+
+{% extends 'base.html' %}
+
+{% block body %}
+
+<section class="section-pad-px">
+  <!-- if there is an id after the categories/ or brands/ url -->
+  {% if obj %}
+    {% include 'products/shared/list_of_products.html' with list_title=title %}
+
+  {% elif model == 'Brand' %}
+    {% include 'products/shared/list_of_brands_categories.html' with list_title=title %}
+  {% elif model == 'Category' %}
+    {% include 'products/shared/list_of_brands_categories.html' with list_title=title %}
+  {% endif %}
+
+</section>
+
+{% endblock %}
+

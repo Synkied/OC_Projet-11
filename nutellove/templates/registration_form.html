@@ -1,0 +1,28 @@
+<!-- A registration form template, calls 'shared/form_template.html' to get all required fields for the form -->
+
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block body %}
+  <section>
+    <div class="container">
+        <div class="row main">
+          <div class="main-center col-sm-12">
+          <h4 class="text-center mb-5">{% blocktrans %} Créer un compte {% endblocktrans %}</h4>
+          <form action="" method="post">
+            {% csrf_token %}
+            {% include 'shared/form_template.html' %}
+            <div class="text-center mt-4">
+              <div class="form-group d-inline">
+                <button type="submit" class="btn btn-primary">{% blocktrans %} S'enregistrer {% endblocktrans %}</button>
+              </div>
+              <div class="form-group d-inline">
+                <a href="{% url 'users:login' %}" class="text-white ml-5">{% blocktrans %} Se connecter {% endblocktrans %}</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

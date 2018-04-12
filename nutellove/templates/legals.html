@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block body %}
+
+    <section class="bg-dark" id="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 mx-auto text-center">
+            <h2 class="section-heading text-white">Mentions légales</h2>
+            <hr class="light my-4">
+            <div class="row">
+            </div>
+            <p class="text-faded mb-4">Crédits :</p>
+            <ul class="list-unstyled text-white">
+              <li>
+                <a href="https://thenounproject.com/FabienJ">Fabien Jouin</a>
+                <p>{% blocktrans %}Pour son icône de carotte{% endblocktrans %} <a href="https://thenounproject.com/term/carrot/29691/"><img height="35px" src="{% static 'img/carrot.svg' %}" alt="Icone de carotte"></a></p>
+              </li>
+              <li>
+                <a href="https://unsplash.com/@olenka_kotyk">Olenka Kotyk</a>
+                <p>{% blocktrans %}Pour l'image de page d'accueil{% endblocktrans %} <a href="https://unsplash.com/photos/eqsEZNCm4-c"><img height="35px" src="{% static 'img/header.jpg' %}" alt="Image de nourriture"></a></p>
+              </li>
+              <li>
+                <a href="https://www.pexels.com/@alexander-dummer-37646">Alexander Dummer</a>
+                <p>{% blocktrans %}Pour l'image de page de compte{% endblocktrans %} <a href="https://www.pexels.com/photo/food-plate-chocolate-dessert-132694/"><img height="35px" src="{% static 'img/account_bg.jpg' %}" alt="Icone de gâteau au chocolat"></a></p>
+              </li>
+              <li>
+                <a href="https://fr.openfoodfacts.org/">OpenFoodFacts</a>
+                <p>{% blocktrans %}Pour l'énorme base de données de produits{% endblocktrans %}</p>
+              </li>
+              <li>
+                <a href="https://fontawesome.com/">FontAwesome</a>
+                <p>{% blocktrans %}Pour les superbes icônes du site{% endblocktrans %}</p>
+              </li>
+              <li>
+                <a href="https://fonts.google.com/">Google Fonts</a>
+                <p>{% blocktrans %}Pour les polices du site{% endblocktrans %}</p>
+              </li>
+              <li>
+                Le site Pur Beurre est hébergé par la société Heroku Inc., 650 7th Street, San Francisco, CA (tel : +33 1 (877) 563-4311). Le stockage des données personnelles des utilisateurs est exclusivement réalisé sur les centres de données ("clusters") de la société Amazon Inc, dont le siège social est situé 10 Terry Avenue North, Seattle, WA. Tous les clusters Amazon sur lesquels les données du Site sont stockées sont localisés dans des Etats membres de l'Union Européenne.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock %}

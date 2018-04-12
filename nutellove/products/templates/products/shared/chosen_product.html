@@ -1,0 +1,39 @@
+<!-- Displays a single product -->
+
+{% load static %}
+
+  <!-- display the chosen product -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 text-center mb-5 align-bottom p-0">
+        <a href="{% url 'products:product_detail' product_id=chosen_product.id %}">
+
+            <div class="contain">
+              <div class="img-container" style="background-image: {% if chosen_product.img is none %} url({% static 'img/placeholder.png' %}) {% else %}  url({{ chosen_product.img }}) {% endif %}"></div>
+              <div class="text-block text-left">
+                <h4 class="superpose-img"><a href="{% url 'products:product_detail' product_id=chosen_product.id %}">{{ chosen_product.name }}</a></h4>
+                <ul class="list-inline">
+                  {% for brand in chosen_product.brands.all %}
+                    {% include 'products/shared/list_brand.html' with product=chosen_product %}
+                  {% endfor %}
+                </ul>
+
+                {% if chosen_product.nutri_grade == "a" %}
+                  <p>Nutriscore : <span class="badge nutri-a text-white">{{ chosen_product.nutri_grade.upper }}</span></p>
+                {% elif chosen_product.nutri_grade == "b" %}
+                  <p>Nutriscore : <span class="badge nutri-b text-white">{{ chosen_product.nutri_grade.upper }}</span></p>
+                {% elif chosen_product.nutri_grade == "c" %}
+                  <p>Nutriscore : <span class="badge nutri-c text-dark">{{ chosen_product.nutri_grade.upper }}</span></p>
+                {% elif chosen_product.nutri_grade == "d" %}
+                  <p>Nutriscore : <span class="badge nutri-d text-white">{{ chosen_product.nutri_grade.upper }}</span></p>
+                {% elif chosen_product.nutri_grade == "e" %}
+                  <p>Nutriscore : <span class="badge nutri-e text-white">{{ chosen_product.nutri_grade.upper }}</span></p>
+                {% endif %}
+
+              </div>
+            </div>
+        </a>
+      </div>
+    </div>
+  </div>
+    <!-- !!end display the chosen product -->

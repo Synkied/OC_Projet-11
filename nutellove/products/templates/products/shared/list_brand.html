@@ -1,0 +1,11 @@
+<!-- Display a list of brands, with conditionnal commas -->
+
+{% if product.brands.all|length_is:"1" %}
+  <li class="list-inline-item"><a href="{% url 'products:brand_detail' obj_id=brand.id %}"> {{ brand.name }} </a></li>
+{% else %}
+  {% if forloop.counter < product.brands.all|length %}
+    <li class="list-inline-item"><a href="{% url 'products:brand_detail' obj_id=brand.id %}"> {{ brand.name }}</a>, </li>
+  {% else %}
+    <li class="list-inline-item"><a href="{% url 'products:brand_detail' obj_id=brand.id %}"> {{ brand.name }}</a> </li>
+  {% endif %}
+{% endif %}

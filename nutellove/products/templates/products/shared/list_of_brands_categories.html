@@ -1,0 +1,33 @@
+<!-- Displays a list of products -->
+
+{% load static %}
+{% load i18n %}
+
+{% if list_title %}
+<h2 class="text-center mb-5 page-title">
+  {% comment %}Translators: No product found{% endcomment %}
+  {% blocktrans %} {{ list_title }} {% endblocktrans %}
+  <hr>
+</h2>
+{% endif %}
+
+<div class="container-fluid">
+  <div class="row">
+    <ul>
+      
+
+    {% for obj in objs %}
+
+      <!-- display infos about product -->
+        {% if forloop.counter < objs|length %}
+          <strong><li class="list-inline-item"><a href="{% if model == 'Brand' %}{% url 'products:brand_detail' obj_id=obj.id %} {% elif model == 'Category' %}{% url 'products:category_detail' obj_id=obj.id %}{% endif %}"> {{ obj.name }}</a></strong>, </li>
+        {% else %}
+          <strong><li class="list-inline-item"><a href="{% if model == 'Brand' %}{% url 'products:brand_detail' obj_id=obj.id %} {% elif model == 'Category' %}{% url 'products:category_detail' obj_id=obj.id %}{% endif %}"> {{ obj.name }}</a> </li></strong>
+        {% endif %}
+
+    {% endfor %}
+    
+    </ul>
+  <!-- !!end display infos about product -->
+  </div>
+</div>

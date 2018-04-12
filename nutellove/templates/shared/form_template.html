@@ -1,0 +1,18 @@
+<!-- Template to call every fields of a form class inside an html form -->
+
+{% load widget_tweaks %}
+
+{% for field in form %}
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <span class="text-danger small">{{ field.errors }}</span>
+    </div>
+    <label class="control-label col-sm-10">{{ field.label_tag }}</label>
+
+    <div class="col-sm-12">
+      <div class="input-group">
+        {% render_field field|add_class:"form-control" %}
+      </div>
+    </div>
+  </div>
+{% endfor %}

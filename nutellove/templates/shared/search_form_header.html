@@ -1,0 +1,11 @@
+{% load i18n %}
+
+<li class="col-lg-6 mt-1">
+  <form action="{% url 'products:search' %}" method="get">
+    <div class="input-group header-input">
+      <input type="text" name="query" class="form-control" placeholder="Chercher...">
+      <div class="input-group-btn"><button type="submit" class="btn btn-primary btn-search h-100">{% blocktrans %} Go {% endblocktrans %}</button></div>
+    </div>
+  </form>
+</li>
+

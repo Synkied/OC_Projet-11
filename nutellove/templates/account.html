@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+
+{% block body %}
+
+  <section class="section-pad">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12 col-sm-12 p-0">
+
+          <div class="card hovercard">
+              <div class="card-background">
+                  <img class="card-bkimg" alt="" src=" {% static 'img/account_bg.jpg' %}">
+                  <!-- http://lorempixel.com/850/280/people/9/ -->
+              </div>
+              <div class="account-msg-box">
+                <h1 class="text-uppercase favorite-msg"><span class="account-msg-txt">{% blocktrans %}Ahoy !{% endblocktrans %}</span></h1>
+              </div>
+              <div class="useravatar">
+                <!-- user img not implemented yet, need to update models and add a form to use an img -->
+                  <img alt="" src="{% if user.image %}{% url '' %}{% else %} {% static 'img/default_user_100x100.png' %} {% endif %}">
+              </div>
+              <div class="card-info"> <span class="card-title">{{ user.username }}</span>
+              </div>
+          </div>
+
+          <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+            <div class="btn-group" role="group">
+              <a id="favorites" class="btn btn-primary" href="{% url 'products:favorites' %}"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                  <div class="hidden-xs">{% blocktrans %}Mes favoris{% endblocktrans %}</div>
+              </a>
+            </div>
+          </div>
+
+    <!-- FOR FURTHER USE, TAB NAVS -->
+    <!--       <ul class="nav nav-tabs">
+      <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#currentPreferences"> {% blocktrans %}Paramètres{% endblocktrans %} </a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#alternative"> {% blocktrans %}Mes favoris{% endblocktrans %} </a>
+      </li>
+    </ul>
+
+    <div class="well">
+      <div class="tab-content">
+
+        <div role="tabpanel" class="tab-pane active" id="currentPreferences">
+          <ul class="list-group media-list media-list-stream">
+            <p>Pref</p>
+          </ul>
+        </div>
+
+        <div role="tabpanel" class="tab-pane fade in" id="alternative">
+          <ul class="list-group media-list media-list-stream">
+            <p>Test</p>
+          </ul>
+        </div>
+
+      </div>
+    </div> -->
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}
