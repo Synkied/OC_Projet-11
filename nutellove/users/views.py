@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -62,3 +63,41 @@ class UserAccountView(LoginRequiredMixin, View):
         }
 
         return render(request, self.template_name, context)
+
+
+class UserChangePassword(LoginRequiredMixin, View):
+
+    template_name = 'users/change_password.html'
+
+    def get(self, request):
+        # empty form for the connected user
+        form = PasswordChangeForm(request.user)
+        return render(request, self.template_name, {
+            'form': form
+        })
+
+    def post(self, request):
+        # filled form sent to POST
+        form = PasswordChangeForm(request.user, request.POST)
+
+        if form.is_valid():
+            user = form.save()
+            # updates the session so the user doesn't have to reconnect
+            # after changing password
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(
+                request, 'Votre mot de passe a été modifié avec succès !'
+            )
+            # return to the account page
+            return redirect('users:account')
+
+        else:
+            messages.error(
+                request, 'Veuillez corriger les erreurs ci-dessous.'
+            )
+
+            # if incorrect inputs, reload the page
+            form = PasswordChangeForm(request.user)
+            return render(request, self.template_name, {
+                'form': form
+            })

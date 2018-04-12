@@ -31,6 +31,9 @@
               <a id="favorites" class="btn btn-primary" href="{% url 'products:favorites' %}"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                   <div class="hidden-xs">{% blocktrans %}Mes favoris{% endblocktrans %}</div>
               </a>
+              <a id="settings" class="btn btn-secondary" href="{% url 'users:change_password' %}"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                  <div class="hidden-xs">{% blocktrans %}Changer de mot de passe{% endblocktrans %}</div>
+              </a>
             </div>
           </div>
 
