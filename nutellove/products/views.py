@@ -9,6 +9,8 @@ from .models import Brand, Category, Product, Favorite
 from django.utils.translation import gettext
 from django.views import View
 
+from .controllers import *
+
 # Create your views here.
 
 
@@ -88,11 +90,14 @@ class BrandCategoryDetail(View):  # pragma: no cover
 
             # conditionnals for text, can be updated I guess
             if self.model == Brand:
-                products = Product.objects.filter(brands=obj.id)[:9]
+                products = Product.objects.filter(brands=obj.id)
                 title = "Produits de la marque {}".format(obj.name)
             elif self.model == Category:
-                products = Product.objects.filter(cat=obj.id)[:9]
+                products = Product.objects.filter(cat=obj.id)
                 title = "Produits de la catégorie {}".format(obj.name)
+
+            products = view_pagination(request, 6, products)
+            page_range = page_indexing(products, 7)
 
             # check if user is not anonymous
             if user.username != "":
@@ -106,6 +111,8 @@ class BrandCategoryDetail(View):  # pragma: no cover
                 'obj': obj,
                 'title': title,
                 'products': products,
+                'paginate': True,
+                'page_range': page_range,
             }
 
             return render(request, self.template_name, context)
@@ -141,6 +148,7 @@ class Search(View):
             title = gettext("Suggestion de produits")
 
             chosen_product = None
+            page_range = None
 
         else:
             # title contains the query and query is not sensitive to case.
@@ -160,16 +168,12 @@ class Search(View):
                         if product.nutri_grade < chosen_product.nutri_grade
                     ]
 
-                products = better_products[:6]
+                products = view_pagination(request, 6, better_products)
+                page_range = page_indexing(products, 7)
 
             else:
                 chosen_product = None
-
-            # title = gettext(
-            #     "Résultats pour la requête {}".format(
-            #         query.capitalize()
-            #     )
-            # )
+                page_range = None
 
             title = ""
 
@@ -186,6 +190,8 @@ class Search(View):
             'products': products,
             'title': title,
             'query': query,
+            'paginate': True,
+            'page_range': page_range,
         }
 
         return render(request, self.template_name, context)

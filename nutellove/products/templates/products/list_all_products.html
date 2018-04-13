@@ -10,12 +10,19 @@
       {% comment %}Translators: No product found{% endcomment %}
       {% blocktrans %} Mince, aucun produit ne correspond à cette recherche. Cherchez à nouveau ! {% endblocktrans %}
     </div>
+
     {% include 'shared/search_form.html' %}
 
-    {% else %}
-  {% include 'shared/search_form.html' %}
+  {% else %}
+    {% include 'shared/search_form.html' %}
     
     {% include 'products/shared/list_of_products.html'%}
+
+    <!-- display a page nav if there are many products -->
+    {% if paginate %}
+      {% include 'products/shared/pagination.html' %}
+    {% endif %}
+    <!-- !!end display a page nav if there are many products -->
   {% endif %}
 
 </section>

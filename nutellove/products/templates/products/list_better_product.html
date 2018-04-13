@@ -33,6 +33,13 @@
     <!-- display better products than the one chosen -->
     {% include 'products/shared/list_of_products.html'%}
   </section>
+
+  <!-- display a page nav if there are many products -->
+  {% if paginate %}
+    {% include 'products/shared/pagination.html' %}
+  {% endif %}
+  <!-- !!end display a page nav if there are many products -->
+
   {% endif %}
 
 
