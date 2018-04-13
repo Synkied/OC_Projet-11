@@ -102,7 +102,9 @@ class BrandCategoryDetail(View):  # pragma: no cover
             # check if user is not anonymous
             if user.username != "":
                 for product in products:
-                    if Favorite.objects.filter(substitute=product, user=user).exists():
+                    if Favorite.objects.filter(
+                        substitute=product, user=user
+                    ).exists():
                         product.is_favorite = True
                     else:
                         product.is_favorite = False
@@ -157,6 +159,10 @@ class Search(View):
             if len(products) > 0:
                 chosen_product = products[0]
 
+                # order products by nutri_grade,
+                # after a product has been chosen
+                products = products.order_by("nutri_grade")
+
                 if chosen_product.nutri_grade == "a":
                     better_products = [
                         product for product in products
@@ -180,7 +186,9 @@ class Search(View):
         # check if user is not anonymous
         if user.username != "":  # pragma: no cover
             for product in products:
-                if Favorite.objects.filter(substitute=product, user=user).exists():
+                if Favorite.objects.filter(
+                    substitute=product, user=user
+                ).exists():
                     product.is_favorite = True
                 else:
                     product.is_favorite = False
@@ -241,7 +249,9 @@ class FavoriteView(LoginRequiredMixin, View):
 
         # Trying to get a favorite from the database, or create a new one
         product = Product.objects.get(pk=product_id)
-        favorite, created = self.model.objects.get_or_create(substitute=product, user=user)
+        favorite, created = self.model.objects.get_or_create(
+            substitute=product, user=user
+        )
 
         # If no new bookmark has been created,
         # Then we believe that the request was to delete the bookmark
