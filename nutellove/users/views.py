@@ -69,7 +69,7 @@ class UserChangePassword(LoginRequiredMixin, View):
 
     template_name = 'users/change_password.html'
 
-    def get(self, request):
+    def get(self, request):  # pragma: no cover
         # empty form for the connected user
         form = PasswordChangeForm(request.user)
         return render(request, self.template_name, {
