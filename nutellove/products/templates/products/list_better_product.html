@@ -4,17 +4,14 @@
 {% load i18n %}
 
 
-
-
-  {% if products|length_is:"0" %}
+  {% if not products %}
   <section class="section-pad-px">
     <div class="text-center mb-5 page-title">
       {% comment %}Translators: No product found{% endcomment %}
       {% blocktrans %} Mince, aucun produit ne correspond à cette recherche. Cherchez à nouveau ! {% endblocktrans %}
     </div>
     {% include 'shared/search_form.html' %}
-</section>
-
+  </section>
 
   {% elif not query %}
   <section class="section-pad">

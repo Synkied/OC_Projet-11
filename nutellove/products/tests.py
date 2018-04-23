@@ -65,7 +65,7 @@ class SearchProductPageTestCase(TestCase):
         biscuit = Product.objects.create(
             code="39047011496",
             url="http://world-fr.openfoodfacts.org/produit/0039047011496/pure-butter-chocolate-chip-shortbread-walkers",
-            name="Pure Butter Chocolate Chip Shortbread",
+            name="Gateau au chocolat trop sucré",
             nutri_grade="e",
             cat=Category.objects.get(
                 name="Biscuits"
@@ -92,7 +92,7 @@ class SearchProductPageTestCase(TestCase):
         gateau = Product.objects.create(
             code="454588",
             url="http://world-fr.openfoodfacts.org/produit/00454588/gateau",
-            name="gateau cool",
+            name="gateau cool au chocolat",
             nutri_grade="b",
             cat=Category.objects.get(
                 name="Biscuits"
@@ -125,11 +125,10 @@ class SearchProductPageTestCase(TestCase):
         test that the search returns the searched product
         """
         response = self.client.get(
-            reverse('products:search'), {"query": "soupe nulle"}
+            reverse('products:search'), {"query": "chocolat"}
         )
 
-        self.assertIn(b'Soupe nulle', response.content)
-
+        self.assertIn(b'gateau cool au chocolat', response.content)
 
     def test_random_list_of_products_if_query_not_found(self):
         """

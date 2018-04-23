@@ -39,3 +39,18 @@ def page_indexing(elems, np_display):
     page_range = list(elems.paginator.page_range)[start_index:end_index]
 
     return page_range
+
+
+def select_better_product(chosen_product, products):
+    if chosen_product.nutri_grade == "a":
+        better_products = [
+            product for product in products
+            if product.nutri_grade == chosen_product.nutri_grade
+        ]
+    else:
+        better_products = [
+            product for product in products
+            if product.nutri_grade <= chosen_product.nutri_grade
+        ]
+
+    return better_products

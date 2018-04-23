@@ -1,4 +1,5 @@
-from random import randint
+import functools
+import operator
 
 from django.contrib import auth
 from django.http import HttpResponse, HttpResponseRedirect
@@ -8,6 +9,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Brand, Category, Product, Favorite
 from django.utils.translation import gettext
 from django.views import View
+from django.db.models import Q
 
 from .controllers import *
 
@@ -97,7 +99,7 @@ class BrandCategoryDetail(View):  # pragma: no cover
                 title = "Produits de la catégorie {}".format(obj.name)
 
             products = view_pagination(request, 6, products)
-            page_range = page_indexing(products, 7)
+            page_range = page_indexing(products, 6)
 
             # check if user is not anonymous
             if user.username != "":
@@ -156,26 +158,40 @@ class Search(View):
             # title contains the query and query is not sensitive to case.
             products = Product.objects.filter(name__icontains=query)
 
-            if len(products) > 0:
+            # split the query in multiple parts (list)
+            q = query.split(" ")
+
+            if products:
                 chosen_product = products[0]
 
+                # https://stackoverflow.com/questions/4824759/
+                # django-query-using-contains-each-value-in-a-list
+                # https://docs.python.org/2/library/operator.html
+                new_query = functools.reduce(
+                    operator.or_, (
+                        Q(
+                            name__icontains=item
+                        ) for item in q)
+                )
+
+                # returns a list of products excluding the chosen product
                 # order products by nutri_grade,
                 # after a product has been chosen
-                products = products.order_by("nutri_grade")
+                products = Product.objects.filter(
+                    new_query,
+                    cat=chosen_product.cat,
+                ).exclude(
+                    name=chosen_product.name
+                ).order_by(
+                    "nutri_grade"
+                )
 
-                if chosen_product.nutri_grade == "a":
-                    better_products = [
-                        product for product in products
-                        if product.nutri_grade == chosen_product.nutri_grade
-                    ]
-                else:
-                    better_products = [
-                        product for product in products
-                        if product.nutri_grade < chosen_product.nutri_grade
-                    ]
+                better_products = select_better_product(
+                    chosen_product, products
+                )
 
                 products = view_pagination(request, 6, better_products)
-                page_range = page_indexing(products, 7)
+                page_range = page_indexing(products, 6)
 
             else:
                 chosen_product = None
